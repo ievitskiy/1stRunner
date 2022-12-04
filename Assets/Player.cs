@@ -28,13 +28,13 @@ public class Player : MonoBehaviour
     void FixedUpdate()
     {
         if (Input.GetKey(up))
-            cube.AddForce(-speed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
-        if (Input.GetKey(down))
             cube.AddForce(speed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
+        if (Input.GetKey(down))
+            cube.AddForce(-speed * Time.deltaTime, 0, 0, ForceMode.VelocityChange);
         if (Input.GetKey(right))
-            cube.AddForce(0, 0, speed * Time.deltaTime, ForceMode.VelocityChange);
-        if (Input.GetKey(left))
             cube.AddForce(0, 0, -speed * Time.deltaTime, ForceMode.VelocityChange);
+        if (Input.GetKey(left))
+            cube.AddForce(0, 0, speed * Time.deltaTime, ForceMode.VelocityChange);
 
         if (Input.GetKey(jump) && cubeIsOnGround)
         {
