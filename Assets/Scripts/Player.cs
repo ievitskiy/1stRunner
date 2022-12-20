@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
     [SerializeField] KeyCode left;
     [SerializeField] KeyCode jump;
     
-    [SerializeField] int speed;
+    [SerializeField] private int speed;
     [SerializeField] int jumpforce;
 
     bool cubeIsOnGround = true;
@@ -45,6 +45,15 @@ public class Player : MonoBehaviour
 
         if (transform.position.y < -10)
             gm.EndGame();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Bonus")
+        {
+            Destroy(other.gameObject);
+            speed += 1;
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
