@@ -3,6 +3,7 @@ using UnityEngine;
 public class KeyboardInput : MonoBehaviour
 {
     [SerializeField] private PhysicsMovement _movement;
+
     void FixedUpdate()
     {
         float horizontal = Input.GetAxis("Horizontal");
