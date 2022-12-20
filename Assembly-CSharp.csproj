@@ -89,6 +89,8 @@
     <Compile Include="Assets\Scripts\Connection.cs" />
     <Compile Include="Assets\Scripts\MainMenu.cs" />
     <Compile Include="Assets\Scripts\SpawnManager.cs" />
+    <Compile Include="Assets\Scripts\StarRotation.cs" />
+    <Compile Include="Assets\Scripts\DeathCheck.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Photon\PhotonLibs\netstandard2.0\Photon3Unity3D.xml" />

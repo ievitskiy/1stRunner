@@ -14,6 +14,7 @@ public class PhysicsMovement : MonoBehaviour
 
     public KeyboardInput scriptKeyboardInput;
 
+    
     private void Awake()
     {
         view = GetComponent<PhotonView>();
@@ -26,41 +27,18 @@ public class PhysicsMovement : MonoBehaviour
         }
     }
 
-    //[Header("Скорость перемещения персонажа")]
-    //public float speed = 7f;
-
-    //private void Update()
-    //{
-    //    GetInput();
-    //}
-
-    //private void GetInput()
-    //{
-    //    if (Input.GetKey(KeyCode.W))
-    //    {
-    //        transform.localPosition += transform.forward * speed * Time.deltaTime;
-    //    }
-
-    //    if (Input.GetKey(KeyCode.S))
-    //    {
-    //        transform.localPosition += -transform.forward * speed * Time.deltaTime;
-    //    }
-
-    //    if (Input.GetKey(KeyCode.A))
-    //    {
-    //        transform.localPosition += -transform.right * speed * Time.deltaTime;
-    //    }
-
-    //    if (Input.GetKey(KeyCode.D))
-    //    {
-    //        transform.localPosition += transform.right * speed * Time.deltaTime;
-    //    }
-    //}
-
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] public float speed;
     private Vector3 _normal;
+    void Update()
+    {
 
+        Vector3 pos = _rigidbody.position;
+        if (pos.y < -10)
+        {
+            _rigidbody.transform.position = new Vector3(0, 1, 2);
+        }
+    }
     private void OnCollisionStay(Collision collision)
     {
         _normal = collision.contacts[0].normal;
@@ -74,4 +52,12 @@ public class PhysicsMovement : MonoBehaviour
         _rigidbody.MovePosition(_rigidbody.position + offset);
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.tag == "Bonus")
+        {
+            Destroy(other.gameObject);
+            speed += 1;
+        }
+    }
 }
