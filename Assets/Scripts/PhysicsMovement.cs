@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
@@ -9,11 +6,8 @@ public class PhysicsMovement : MonoBehaviour
     PhotonView view;
 
     public GameObject Camera;
-
     public PhysicsMovement scriptPlayerController;
-
     public KeyboardInput scriptKeyboardInput;
-
     
     private void Awake()
     {
@@ -29,27 +23,18 @@ public class PhysicsMovement : MonoBehaviour
 
     [SerializeField] private Rigidbody _rigidbody;
     [SerializeField] public float speed;
-    private Vector3 _normal;
-    void Update()
-    {
+    [SerializeField] private float lookSpeed = 5f;
 
-        Vector3 pos = _rigidbody.position;
-        if (pos.y < -10)
-        {
-            _rigidbody.transform.position = new Vector3(0, 1, 2);
-        }
-    }
-    private void OnCollisionStay(Collision collision)
-    {
-        _normal = collision.contacts[0].normal;
-    }
+    [SerializeField] private ChunkPlacer ChunkFirst;
+    
     public void Move(Vector3 direction)
     {
+        _rigidbody.MovePosition(_rigidbody.position + direction.x * _rigidbody.transform.forward*Time.deltaTime*speed  /*+direction*speed*Time.deltaTime*/);
+    }
 
-        Vector3 directionAlongSurface = Vector3.ProjectOnPlane(direction, _normal);
-        Vector3 offset = directionAlongSurface * (speed * Time.deltaTime);
-
-        _rigidbody.MovePosition(_rigidbody.position + offset);
+    public void Rotate(Vector3 direction)
+    {
+        _rigidbody.MoveRotation(_rigidbody.rotation *Quaternion.Euler(direction*lookSpeed));
     }
 
     private void OnTriggerEnter(Collider other)

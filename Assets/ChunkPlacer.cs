@@ -27,6 +27,19 @@ public class ChunkPlacer : MonoBehaviour
         {
             SpawnChunk();
         }
+
+        if (spawnedChunks.Count > 4)
+        {
+            Destroy(spawnedChunks[0].gameObject);
+            spawnedChunks.RemoveAt(0);
+        }
+
+        if (_cube.position.y < -10)
+        {
+            _cube.position = spawnedChunks[0].get_end().position;
+
+            //_rigidbody.transform.position = new Vector3(0, 1, 2);
+        }
     }
     private void SpawnChunk()
     {
@@ -37,4 +50,10 @@ public class ChunkPlacer : MonoBehaviour
         MeshCollider collider = mesh.AddComponent(typeof(MeshCollider)) as MeshCollider;
         spawnedChunks.Add(newChunk);
     }
+
+    public Vector3 GetFirstChunckEndPos()
+    {
+        return spawnedChunks[0].get_end().position;
+    }
+
 }

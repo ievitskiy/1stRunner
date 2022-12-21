@@ -6,9 +6,12 @@ public class KeyboardInput : MonoBehaviour
 
     void FixedUpdate()
     {
-        float horizontal = Input.GetAxis("Horizontal");
         float vertical = Input.GetAxis("Vertical");
 
-        _movement.Move(new Vector3(vertical, 0, -horizontal));
+        _movement.Move(new Vector3(vertical, 0,0));
+
+        float yRot = Input.GetAxisRaw("Mouse X");
+
+        _movement.Rotate(new Vector3(0f, yRot, 0f));
     }
 }

@@ -8,6 +8,8 @@ public class CamFollow : MonoBehaviour
     [SerializeField] Vector3 dist;
     void Update()
     {
-        transform.position = cube.position + dist;
+        transform.position = cube.position - cube.forward*5;
+        transform.localPosition += dist;
+        //transform.localRotation = cube.rotation;
     }
 }
